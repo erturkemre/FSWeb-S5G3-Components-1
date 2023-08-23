@@ -115,3 +115,52 @@ const data = [
   Adım 5: Veri dizisine yeni haber nesnesi eklemeyi deneyin. Diğer verilerle aynı yapıda olmasına dikkat edin.
   Eklediğiniz yeni haberi görmek için sayfayı yenileyin.
 */
+
+function haberYapici(data) {
+  const newsDiv = document.createElement("div");
+  newsDiv.classList.add("article");
+
+  const newsHead = document.createElement("h2");
+  newsHead.textContent = data.baslik;
+
+  const newsDate = document.createElement("p");
+  newsDate.setAttribute("class", "tarih");
+  newsDate.textContent = data.tarih;
+
+  const newsParag1 = document.createElement("p");
+  newsParag1.setAttribute("class", "paragraph1");
+  newsParag1.textContent = data.ilkParagraf;
+
+  const newsParag2 = document.createElement("p");
+  newsParag2.setAttribute("class", "paragraph2");
+  newsParag2.textContent = data.ikinciParagraf;
+
+  const newsParag3 = document.createElement("p");
+  newsParag3.setAttribute("class", "paragraph3");
+  newsParag3.textContent = data.ucuncuParagraf;
+
+  const btn = document.createElement("button");
+  btn.classList.add("expandButton");
+  btn.textContent = "+";
+
+  newsDiv.append(newsHead);
+  newsDiv.append(newsDate);
+  newsDiv.append(newsParag1);
+  newsDiv.append(newsParag2);
+  newsDiv.append(newsParag3);
+  newsDiv.append(btn);
+
+  btn.addEventListener("click", (e) => {
+    newsDiv.classList.toggle("article-open");
+    //e.target.parentElement.classList.toggle('article-open');
+  });
+
+  return newsDiv;
+}
+
+const b = document.querySelector(".articles");
+
+for (let d of data) {
+  const newsCard = haberYapici(d);
+  b.appendChild(newsCard);
+}
